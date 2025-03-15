@@ -11,17 +11,18 @@ def detect_emotion():
     text_to_analyze = request.args.get("textToAnalyze")
     result = emotion_detector(text_to_analyze)
 
-    if result["dominant_emotion"] == None:
+    if result["dominant_emotion"] is None:
         return "<b>Invalid text! Please try again!</b>"
 
-    anger_score_result = f"'anger': {result['anger']}"
-    disgust_score_result = f"'disgust': {result['disgust']}"
-    fear_score_result = f"'fear': {result['fear']}"
-    joy_score_result = f"'joy': {result['joy']}"
-    sadness_score_result = f"'sadness': {result['sadness']}"
-    emotion_score_result = f"{anger_score_result}, {disgust_score_result}, {fear_score_result}, {joy_score_result} and {sadness_score_result}"
-
-    return f"For the given statement, the system response is {emotion_score_result}. The dominant emotion is <b>{result['dominant_emotion']}</b>."
+    anger= f"'anger': {result['anger']}"
+    disgust = f"'disgust': {result['disgust']}"
+    fear = f"'fear': {result['fear']}"
+    joy = f"'joy': {result['joy']}"
+    sadness = f"'sadness': {result['sadness']}"
+    emotion_result = f"{anger}, {disgust}, {fear}, {joy} and {sadness}"
+    result_prefix = "For the given statement, the system response is"
+    result_suffix = f"The dominant emotion is <b>{result['dominant_emotion']}</b>"
+    return f"{result_prefix} {emotion_result}. {result_suffix}."
 
 @app.route("/")
 def home():
